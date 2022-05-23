@@ -57,7 +57,7 @@ This project was built with
    ```
 2. Install NPM packages
    ```sh
-   npm install
+   yarn install
    ```
 3. Run the app
    ```sh
