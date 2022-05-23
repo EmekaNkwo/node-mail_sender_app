@@ -70,6 +70,7 @@ This project was built with
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/NkwoCc) - emekankwo49@gmail.com
+Twitter - [@NkwoCc](https://twitter.com/NkwoCc)
+Email Address - emekankwo49@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
