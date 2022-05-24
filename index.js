@@ -1,8 +1,8 @@
 const express = require("express");
 const multer = require("multer");
-const dotenv = require("dotenv");
 const { google } = require("googleapis");
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
 
 const app = express();
 
@@ -38,14 +38,12 @@ const attachmentUpload = multer({
 const OAuth2 = google.auth.OAuth2;
 
 const createTransporter = async () => {
-  // 1
   const oauth2Client = new OAuth2(
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
     "https://developers.google.com/oauthplayground"
   );
 
-  // 2
   oauth2Client.setCredentials({
     refresh_token: process.env.REFRESH_TOKEN,
   });
@@ -63,7 +61,8 @@ const createTransporter = async () => {
     service: "gmail",
     auth: {
       type: "OAuth2",
-      user: process.env.SENDER_EMAIL,
+      user: process.env.EMAIL,
+      // pass: process.env.PASSWORD,
       accessToken,
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
@@ -78,7 +77,6 @@ app.get("/", (req, res) => {
   res.sendFile("/index.html");
 });
 
-// Route to handle sending mails
 app.post("/send-email", (req, res) => {
   attachmentUpload(req, res, async function (error) {
     if (error) {
@@ -92,7 +90,7 @@ app.post("/send-email", (req, res) => {
 
       // Mail options
       let mailOptions = {
-        from: process.env.SENDER_EMAIL,
+        from: process.env.EMAIL,
         to: recipient,
         subject: mailSubject,
         text: mailBody,
